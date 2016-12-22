@@ -1,0 +1,734 @@
+////////////////////////////////////////////////1
+<script>
+    function checkPrime(number)
+    {
+        if (number==2) return true;
+        if (number%2 == 0) return false;
+        for(var i=3; i<=Math.sqrt(number); i = i+2){//divisible by any even number larger than 4, then it can be divisible by 2 too
+            if (number%i == 0) return false;
+            else return true;
+        }
+    }
+    alert(checkPrime(37));
+</script>
+
+
+////////////////////////////////////////////////2(1)
+//find all prime number small or equal to a given number(1)
+<script>
+    function primeNumberLessThan(number)
+    {
+        var numberArray = [];
+        var primeMark = [];
+        var primeArray = [];
+        for (var count = 1; count <= number; count++)
+        {
+            numberArray.push(count);
+            primeMark.push(1);
+        }
+        for(var count=1; count < primeMark.length; count++){//start with number 2, step 1//////////difference
+            if (primeMark[count] == 1)
+            {
+                primeArray.push(numberArray[count]);
+                var n = 1;
+                while(numberArray[count]*n<=number)
+                {
+                    primeMark[numberArray[count]*n-1] = 0;
+                    n++;
+                }
+            }
+        }
+        return primeArray;
+    }
+    alert(primeNumberLessThan(120));
+</script>
+
+//find all prime number small or equal to a given number(2)
+
+<script>
+    function primeNumberLessThan(number)
+    {
+        var numberArray = [];
+        var primeMark = [];
+        var primeArray = [];
+        for (var count = 1; count <= number; count++)
+        {
+            numberArray.push(count);
+            primeMark.push(1);
+        }
+        primeArray.push(2);
+        for(var count=2; count < primeMark.length; count = count +2){//start with number 3, step 2 //////////difference
+            if (primeMark[count] == 1)
+            {
+                primeArray.push(numberArray[count]);
+                var n = 1;
+                while(numberArray[count]*n<=number)
+                {
+                    primeMark[numberArray[count]*n-1] = 0;
+                    n++;
+                }
+            }
+        }
+        return primeArray;
+    }
+    alert(primeNumberLessThan(120));
+</script>
+
+
+
+////////////////////////////////////////////////2(2)
+<script>
+    function primeFactor(number)
+    {
+        var primeF = [];
+        var divisor = 2;
+        while(divisor <= number)
+        {
+            if (number%divisor==0)
+            {
+                primeF.push(divisor);
+                while (number % divisor == 0)
+                    {
+                    number = number / divisor;
+                }
+            }
+            if (divisor > =3)
+			{
+				divisor += 2;
+			}
+			else
+			{
+				divsior += 1;
+			}
+        }
+        return primeF;
+    }
+    alert(primeFactor(67));
+</script>
+///////////////////////////////////3(1)
+
+
+<script>
+    function Fibonacci(n)
+    {
+        var fibArray = [];
+        fibArray[0] = 1;
+        fibArray[1] = 1;
+        for(var count = 3; count <= n; count++)
+        {
+            fibArray[count-1] = fibArray[count-2] + fibArray[count-3];
+        }
+        return fibArray[n-1];
+    }
+    alert(Fibonacci(12));
+</script>
+
+
+///////////////////////////////////3(2)
+
+<script>
+    function FibonacciRecursive(n)
+        {
+            if (n==1 ||n==2)
+            {
+                return 1;
+            }
+            return FibonacciRecursive(n-1) + FibonacciRecursive(n-2);
+        }
+    alert(FibonacciRecursive(12));
+</script>
+
+//////////////////////////////////
+<script>
+function greatestCommonDivisor(a, b){
+  var divisor = 2, 
+      greatestDivisor = 1;
+
+  //if u pass a -ve number this will not work. fix it dude!!
+  if (a < 2 || b < 2)
+     return 1;
+  
+  while(a >= divisor && b >= divisor){
+   if(a %divisor == 0 && b% divisor ==0){
+      greatestDivisor = divisor;      
+    }
+   divisor++;
+  }
+  return greatestDivisor;
+}
+</script>
+
+///////////////////////////////////////
+///////4(1)
+<script>
+function greatestCommonDivisor(a, b){
+    var divisor = 2,
+        greatestDivisor = 1;
+    
+    if (a < 2 || b < 2)
+        return 1;
+
+    while(a >= divisor && b >= divisor){
+        if(a %divisor == 0 && b% divisor ==0){
+            greatestDivisor = divisor;
+        }
+        divisor++;
+    }
+    return greatestDivisor;
+}
+alert(greatestCommonDivisor(14, 21));
+</script>
+
+
+///////////////////////////////////////
+///////4(2)A much more efficient method is the Euclidean algorithm, which uses a division algorithm such as long division in combination with the observation
+//that the gcd of two numbers also divides their difference. To compute gcd(48,18), divide 48 by 18 to get a quotient of 2 and a remainder of 12. Then divide
+//18 by 12 to get a quotient of 1 and a remainder of 6. Then divide 12 by 6 to get a remainder of 0, which means that 6 is the gcd. Note that we ignored the 
+//quotient in each step except to notice when the remainder reached 0, signalling that we had arrived at the answer. Formally the algorithm can be described as:
+
+<script>
+function greatestCommonDivisor(a, b)
+{
+    var big = (a>b)?a:b;
+    var small = (a<=b)?a:b;
+    if (big%small == 0)
+    {
+        return small;
+    }
+    return greatestCommonDivisor(small,big%small);
+}
+alert(greatestCommonDivisor(46, 69));
+</script>
+
+/////////////4(3)
+<script>
+function greatestCommonDivisor(a, b)
+{
+    var big = (a>b)?a:b;
+    var small = (a<=b)?a:b;
+    while (big%small != 0)
+    {
+        temp = small;
+        small = big%small;
+        big = small;
+    }
+    return small;
+}
+alert(greatestCommonDivisor(4, 201));
+</script>
+
+//////////////////5
+
+<script>
+function removeDuplicate(arr)
+{
+    var exist = {};
+    var newArray = [];
+    for(var count = 0; count < arr.length; count++)
+    {
+        if (!exist[arr[count]]) {
+            newArray.push(arr[count]);
+            exist[arr[count]] = true;
+        }
+    }
+    return newArray;
+}
+alert(removeDuplicate([1, 1, 2, 2, 3, 3]));
+</script>
+
+////////////////////////////6
+function mergeSortted(arr1, arr2)
+{
+    var pointer1 = 0;
+    var pointer2 = 0;
+    var newArray = [];
+    while(pointer1<arr1.length || pointer2<arr2.length)
+    {
+        if (pointer1 == arr1.length)
+        {
+            newArray.push(arr2[pointer2]);
+            pointer2++;
+            continue;
+        }
+        if (pointer2 == arr2.length)
+        {
+            newArray.push(arr1[pointer1]);
+            pointer1++;
+            continue;
+        }
+        if(arr1[pointer1]<=arr2[pointer2])
+        {
+            newArray.push(arr1[pointer1]);
+            pointer1++;
+        }
+        else
+        {
+            newArray.push(arr2[pointer2]);
+            pointer2++;
+        }
+    }
+    return newArray;
+}
+alert(mergeSortted([2,5,6,9], [1,2,3,29]));
+</script>
+
+
+///////////////////////////
+//////7(1)
+function swap2Numbers(num1, num2)
+{
+    alert("number1 is " +  num1 + ". number2 is " + num2);
+    num1 = num1 ^ num2;
+    num2 = num1 ^ num2;
+    num1 = num1 ^ num2;
+    alert("number1 is " +  num1 + ". number2 is " + num2);
+}
+swap2Numbers(4, 6);
+</script>
+
+
+//////////////////
+7(2)
+
+function swap2Numbers(a, b)
+{
+    alert('before swap: '+ 'a: '+ a + 'b: '+ b);
+    b = b -a;
+    a = a+ b;
+    b = a-b;
+    alert('after swap: '+ 'a: '+ a + 'b: '+ b);
+}
+swap2Numbers(2, 3);
+</script>
+///////////////////////////
+////////////////8
+
+<script>
+function reverseStr(str)
+{
+    strArray = [8, 9];
+    alert(strArray.pop()); //pop from array end
+    alert(strArray);
+    strArray = [8, 9];
+    alert(strArray.shift());//shift from array beginning
+    alert(strArray);
+}
+reverseStr("abcdefg");
+</script>
+
+
+//////////////////////
+///////////8
+
+<script>
+function reverseStr(str)
+{
+
+    strArray = [];
+    for(var count = str.length - 1; count >= 0; count-- )
+    {
+        strArray.push(str.charAt(count));
+    }
+    return strArray.join("");
+}
+alert(reverseStr("abcdefg"));
+</script>
+
+///////////////str.substr(1); the second to the last substring
+
+
+///////////var str = "How are you doing today?";
+////////////////var res = str.split(""); return array of H,o,w, ,a.....
+
+/////////////str.split('').reverse().join('') str to char array, array reverse, then join to string
+
+
+
+///////////////alert("Hello! How are you".substr(6,7));                How ar
+
+
+function reverseWords(str){
+ var rev = [], 
+     wordLen = 0;
+ for(var i = str.length-1; i>=0; i--){
+   if(str[i]==' ' || i==0){
+     rev.push(str.substr(i,wordLen+1));
+     wordLen = 0;
+   }
+   else
+     wordLen++;
+ }
+ return rev.join(' ');
+}
+
+
+//////////////////10
+
+function reverseInPlace(str){
+    return str.split(' ').reverse().join(' ').split('').reverse().join('');
+}
+alert(reverseInPlace("Hello! How are you"));
+
+
+/////////////10(2)
+
+function reverseInPlace(str){
+    return str.split(' ').reverse().join(' ').split('').reverse().join('');
+}
+alert(reverseInPlace("Hello! How are you"));
+
+
+
+//////////10
+<script>
+function reverseInPlace(str){
+    //return str.split(' ').reverse().join(' ').split('').reverse().join('');
+    var strArray = [];
+    var tempArray = [];
+    var pointer1 = 0;
+    var count = 0;
+    while (pointer1 + count < str.length)
+    {
+        if(str.charAt(pointer1+count) != " ")
+        {
+            tempArray.push(str.charAt(pointer1+count));
+            count++;
+        }
+        else
+        {
+            for(var a = 0; a < tempArray.length;)
+            {
+
+                strArray.push(tempArray.pop());
+            }
+            strArray.push(" ");
+            pointer1 = pointer1 + count + 1;
+            count = 0;
+        }
+    }
+    for(var a = 0; a < tempArray.length;)
+    {
+
+        strArray.push(tempArray.pop());
+    }
+    strArray.push(" ");
+    return strArray.join("");
+}
+alert(reverseInPlace("I am the good boy"));
+</script>
+
+//////////11
+function firstNonRepeatChar(str)
+{
+    var len = str.length,
+        char,
+        charCount = {};
+    for(var i =0; i<len; i++){
+        char = str[i];
+        if(charCount[char]){
+            charCount[char]++;
+        }
+        else
+            charCount[char] = 1;
+    }
+    for(var i =0; i<len; i++){
+        if (charCount[str[i]]==1)
+            return str[i];
+    }
+}
+//alert(firstNonRepeatChar('the quick brown fox jumps then quickly blow air'));
+alert(firstNonRepeatChar('acbdefghijklmnopqrstuvwxyzABC acbdefghijklmnopqrstuvwxyz'));
+
+
+//////ou: This is very similar to first non repeating char. You will asks similar question. Is it case sensitive.
+
+////If interviewer says, this is case sensitive then life become easier you. If he says no. you can either use string.toLowercase()
+/////to make whole string lower. he might not like it. 
+///////because return string will not posses the same case. So
+
+////12 remove all duplicate completely
+
+
+<script>
+function removeDuplicateChar(str)
+{
+    var len = str.length,
+        char,
+        charCount = {},
+        newStr = [];
+    for (var i = 0; i < len; i++) {
+        char = str[i];
+        if (charCount[char]) {
+            charCount[char]++;
+        }
+        else
+            charCount[char] = 1;
+    }
+    for(var i =0; i<len; i++){
+        if (charCount[str[i]]==1)
+            newStr.push(str[i]);
+    }
+    return newStr.join("");
+}
+alert(removeDuplicateChar("Learn more javascript dude"));
+</script>
+
+
+///////////12(2) KEEP FIRST LETTER APPEARED
+
+<script>
+function removeDuplicateChar(str)
+{
+    var len = str.length,
+        char,
+        charCount = {},
+        newStr = [];
+    for (var i = 0; i < len; i++) {
+        char = str[i];
+        if (!charCount[char]) {
+            charCount[char] = 1;
+            newStr.push(char);
+        }
+    }
+    return newStr.join("");
+}
+alert(removeDuplicateChar("Learn more javascript dude"));
+</script>
+
+
+/////////13(1)
+function isPalindrome(str){
+  var i, len = str.length;
+  for(i =0; i<len/2; i++){
+    if (str[i]!== str[len -1 -i])
+       return false;
+  }
+  return true;
+}
+//////13(2)
+
+function checkPalindrom(str) {
+    return str == str.split('').reverse().join('');
+}
+
+
+
+///////////14
+function rand5()
+{
+    var rand = 1 + Math.random() * 4;
+    return rand;
+}
+
+function rand7()
+{
+    var rand = (rand5() - 1) * 6/4 + 1;
+    return rand;
+}
+alert(rand7());
+
+
+
+
+///////str[count] string is like a array
+
+
+/////////
+function missingNumber(arr){
+  var n = arr.length+1, 
+  sum = 0,
+  expectedSum = n* (n+1)/2;
+  
+  for(var i = 0, len = arr.length; i < len; i++){
+    sum += arr[i];
+  }
+  
+  return expectedSum - sum;
+}
+
+
+///////////16
+
+function sumFinder(arr, sum){
+    var differ = {},
+        len = arr.length,
+        substract;
+    for(var i =0; i<len; i++){
+        substract = sum - arr[i];
+
+        if(differ[substract])           ///important
+            return true;
+        else
+            differ[arr[i]] = true;      ///important
+    }
+    return false;
+}
+</script>
+
+
+
+
+/////////////////
+
+/*
+Today’s problem is this:
+
+Given an array X, find the j and i that maximizes Xj − Xi, subject to the condition that i ≤ j.
+If two different i,j pairs have equal differences, choose the “leftmost shortest” pair with the smallest i and, in case of a tie, the smallest j.
+
+For instance, given an array [4, 3, 9, 1, 8, 2, 6, 7, 5], the maximum difference is 7 when i=3 and j=4. Given the array [4, 2, 9, 1, 8, 3, 6, 7, 5], 
+the maximum difference of 7 appears at two points, but by the leftmost-shortest rule the desired
+result is i=1 and j=2. I and j need not be adjacent, as in the array [4, 3, 9, 1, 2, 6, 7, 8, 5], 
+where the maximum difference of 7 is achieved when i=3 and j=7. If the array is monotonically decreasing the maximum difference is 0, which by the 
+leftmost-shortest rule occurs when i=0 and j=0.
+
+There are at least two solutions. The obvious solution that runs in quadratic time uses two nested loops, the outer loop over i from 0 to the length of the array n 
+and the inner loop over j from i+1 to n, computing the difference between Xi and Xj and saving the result whenever a new maximum difference is found. 
+There is also a clever linear-time solution that traverses the array once, simultaneously searching for a new minimum value and a new maximum difference; 
+you’ll get it if you think about it for a minute.
+
+Your task is to write both the quadratic and linear functions to compute the maximum difference in an array, and also a test function that demonstrates 
+they are correct. When you are finished, you are welcome to read or run a suggested solution, 
+or to post your own solution or discuss the exercise in the comments below.
+
+
+1st round 	min 4, dif 0
+2nd round 	min 3, dif 0
+3rd round 	min 3, dif 6
+			min 1, dif 6
+			min 1, dif 7
+			............
+			
+////////////////
+17 too eszy skip
+
+
+
+
+//////////
+18 counting tailing 0'same
+
+function countZero(n){
+  var count = 0;
+  while(n>0){
+   count += Math.floor(n/10);
+   n = n/10;
+  }
+  return count;
+}
+
+////////////////19 index
+<script>
+function subStringFinder(str, subStr)
+{
+    var pointer = 0;
+    var count = 0;
+    for (;pointer + subStr.length <= str.length;)
+    {
+        for(; count < subStr.length; count++)
+        {
+            if(str[pointer+count] == subStr[count])
+            {
+                if (count == subStr.length - 1)
+                {
+                    return pointer;
+                }
+                continue;
+            }
+            else
+            {
+                pointer++;
+                break;
+            }
+        }
+    }
+    return -1;
+}
+
+alert(subStringFinder('abbcdabbbbbck', 'ab'));
+alert(subStringFinder('abbcdabbbbbck', 'bck'));
+alert(subStringFinder('abbcdabbbbbck', 'bbbck') );
+</script>
+
+
+//////////20
+
+
+//////The splice() method adds/removes items to/from an array, and returns the removed item(s).
+/////array.splice(index, howmany, item1, ....., itemX)
+
+
+<script>
+function arraylize(str)
+{
+    return str.split("");
+}
+function stringlize(arr)
+{
+    return arr.join("");
+}
+
+function permutations(str)
+{
+    var permutationArray = [];
+    //alert("str array length is" + str.length);
+    if (str.length == 0) {
+        permutationArray.push("");
+        return permutationArray;
+    }
+    else {
+        for (var count = 0; count < str.length; count++)//str is String Array, each element is a char
+        {
+
+            var temp = [];
+            var char = str.splice(count, 1);
+            var permutationArray = permutations(str);
+            var wordLength = permutationArray[count].length;
+
+            for (var count1 = 0; count1 < permutationArray.length; count1++) {
+                for (var count2 = 0; count2 <= permutationArray[count1].length; count2++) {
+                    var word = permutationArray[count1];
+                    var wordArray = arraylize(word);
+                    wordArray.splice(count2, 0, char);
+                    temp[count1 * (wordLength + 1) + count2] = stringlize(wordArray);
+                    //alert(temp);
+                }
+            }
+        }
+        return temp;
+    }
+}
+alert(permutations(arraylize("a1b2")));
+</script>
+
+///////20
+<script>
+    function permutations(str){
+        var arr = str.split(''),
+            len = arr.length,
+            perms = [],
+            rest,
+            picked,
+            restPerms,
+            next;
+
+        if (len == 0)
+            return [str];
+
+        for (var i=0; i<len; i++)
+        {
+            rest = Object.create(arr);
+            picked = rest.splice(i, 1);
+
+            restPerms = permutations(rest.join(''));
+
+            for (var j=0, jLen = restPerms.length; j< jLen; j++)
+            {
+                next = picked.concat(restPerms[j]);// choose the first only
+                perms.push(next.join(''));
+            }
+        }
+        return perms;
+    }
+alert(permutations("abc"));
+</script>
